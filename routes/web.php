@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TutorController;
 
 // Redirecionamentos da raiz
 Route::get('/', function () {
@@ -31,15 +32,15 @@ Route::middleware(['auth', 'user.active'])->group(function () {
                 'users' => 'user',
         ]);
     });
-   
-});
 
+    Route::resource('tutors', TutorController::class);
 
 // Rotas de Autenticação
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 
-Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/login', [AuthController::class, 'login']);
 
-Route::post('/logout', [AuthController::class, 'logout'])
-    ->middleware('auth')
-    ->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])
+        ->middleware('auth')
+        ->name('logout');
+});
