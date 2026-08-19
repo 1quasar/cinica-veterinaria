@@ -31,11 +31,14 @@ Route::middleware(['auth', 'user.active'])->group(function () {
         Route::resource('users', UserController::class)->parameters([
                 'users' => 'user',
         ]);
+        Route::resource('servicos', ServicoController::class)->parameters([
+        'servicos' => 'servico',
+        ]);
     });
 
     Route::resource('tutors', TutorController::class);
 
-// Rotas de Autenticação
+    // Rotas de Autenticação
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 
     Route::post('/login', [AuthController::class, 'login']);
